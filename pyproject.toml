@@ -7,7 +7,13 @@ authors = [
     { name = "Mira", email = "01aklmira@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.3",
+    "pandas>=3.0.6",
+    "scikit-learn>=1.9.1",
+    "seaborn>=0.13.2",
+]
 
 [project.scripts]
 titanic = "titanic:main"
