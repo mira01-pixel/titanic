@@ -3,9 +3,10 @@ from pathlib import Path
 import pickle
 import pandas as pd
 
-# Import both models from your package
+# Import all three models from your package
 from my_package.model.model import TitanicModel
 from my_package.model.random_forest_model import RandomForestTitanicModel
+from my_package.model.xgboost_model import XGBoostTitanicModel
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Train Titanic survival model")
@@ -15,12 +16,12 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument(
         "--output", required=True, help="Path to save the trained model pickle file"
     )
-    # Add a new argument to select the model
+    # Update choices to include xgboost
     p.add_argument(
         "--model-type", 
-        choices=["logistic", "rf"], 
+        choices=["logistic", "rf", "xgboost"], 
         default="logistic", 
-        help="Type of model to train: 'logistic' or 'rf'"
+        help="Type of model to train: 'logistic', 'rf', or 'xgboost'"
     )
     return p
 
@@ -41,6 +42,9 @@ def main():
     if args.model_type == "rf":
         print("Training Random Forest model...")
         model_instance = RandomForestTitanicModel()
+    elif args.model_type == "xgboost":
+        print("Training XGBoost model...")
+        model_instance = XGBoostTitanicModel()
     else:
         print("Training Logistic Regression model...")
         model_instance = TitanicModel()
